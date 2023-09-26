@@ -13,7 +13,7 @@ let profilePicture = 'images/me.jpg';
 const nameElement = document.getElementById('name');
 const foodElement = document.getElementById("food");
 const yearElement = document.querySelector('#year');
-const imageElement = document.getElementById('image');
+const imageElement = document.querySelector("img[src='Profilepicture']");
 
 
 
@@ -23,6 +23,7 @@ nameElement.innerHTML = `<strong>${fullName}</strong>`;
 yearElement.textContent = currentYear;
 imageElement.setAttribute('src', profilePicture);
 imageElement.setAttribute('alt', `Profile image of [Insert Name Variable]`);
+
 
 
 
