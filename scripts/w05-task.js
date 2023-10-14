@@ -2,10 +2,10 @@
 
 /* Declare and initialize global variables */
 const templesElement = document.getElementById("temples")
-let temples = [];
+let templesList = [];
 /* async displayTemples Function */
-const displayTemples = (temples) => {
-    temples.forEach(temple => {
+const displayTemples = (templesList) => {
+    templesList.forEach(temple => {
         let article = document.createElement("article")
 
         let header3 = document.createElement("h3")
@@ -13,49 +13,49 @@ const displayTemples = (temples) => {
 
         let templeImage = document.createElement("img")
         templeImage.setAttribute("src", temple.imageUrl)
-        templeImage.setAttribute("alt", temple.templeName)
+        templeImage.setAttribute("alt", temple.location)
 
         article.appendChild(header3);
         article.appendChild(templeImage);
 
-        templesElement.appendChild(article)
+        templesElement.appendChild(article);
     });
 }
 /* async getTemples Function using fetch()*/
 const getTemples = async () => {
     const response = await fetch("https://byui-cse.github.io/cse121b-ww-course/resources/temples.json");
-    temples = await response.json();
-    output=(temples);
+    templesList = await response.json();
+    displayTemples(templesList);
 };
 getTemples();
 /* reset Function */
 function reset() {
-    document.getElementById("temples").innerHTML = "";
+    document.getElementById("temples").innerHTML = [];
 }
 /* sortBy Function */
-function sortBy (temples) {
+function sortBy (templesList) {
     reset(); 
 
     let templeFilter = document.getElementById("sortBy").value;
 
     switch (templeFilter){
         case "utah":
-            const utahTemples = temples.filter((temple) => temple.location.toLowerCase().includes('utah'));
+            const utahTemples = templesList.filter((temple) => temple.location.toLowerCase().includes('utah'));
              displayTemples(utahTemples);
             break;
 
         case "notutah":
-            const notutahTemples = temples.filter((temple) => !temple.location.toLowerCase().includes("utah"));
+            const notutahTemples = templesList.filter((temple) => !temple.location.toLowerCase().includes("utah"));
             displayTemples(notutahTemples)
             break;
 
         case "older":
-            const olderTemples = temples.filter((temple) => temple.dedicated.toLowerCase() < ("1950"));
+            const olderTemples = templesList.filter((temple) => temple.dedicated.toLowerCase() < ("1950"));
             displayTemples(olderTemples)
             break;
 
         case "all":
-            const allTemple = temples.filter((temple) => temple.location.toLowerCase()!=('notutah'));
+            const allTemple = templesList.filter((temple) => temple.location.toLowerCase()!=('notutah'));
             displayTemples(allTemple)
             break;
     }
@@ -63,4 +63,4 @@ function sortBy (temples) {
 getTemples();
 
 /* Event Listener */
-document.querySelector("#sortBy").addEventListener("change", () => {sortBy(temples) });
+document.querySelector("#sortBy").addEventListener("change", () => {sortBy(templesList) });
