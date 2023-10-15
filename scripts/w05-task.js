@@ -46,17 +46,17 @@ function sortBy (templesList) {
 
         case "notutah":
             const notutahTemples = templesList.filter((temple) => !temple.location.toLowerCase().includes("utah"));
-            displayTemples(notutahTemples)
+            displayTemples(notutahTemples);
             break;
 
         case "older":
             const olderTemples = templesList.filter((temple) => temple.dedicated.toLowerCase() < ("1950"));
-            displayTemples(olderTemples)
+            displayTemples(olderTemples);
             break;
 
         case "all":
             const allTemple = templesList.filter((temple) => temple.location.toLowerCase()!=('notutah'));
-            displayTemples(allTemple)
+            displayTemples(allTemple);
             break;
     }
 };
